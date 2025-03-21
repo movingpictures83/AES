@@ -14,10 +14,18 @@ input <- function(inputfile) {
      pfix <- paste(pfix, "/", sep="")
   }
 
-mydata <- read.csv(paste(pfix, parameters["csvfile", 2], sep="/"))
+mydata <- read.csv(paste(pfix, parameters["csvfile", 2], sep="/"), check.names=FALSE)
 mydata <- as.data.frame(mydata)
 numeric_vars <- readLines(paste(pfix, parameters["features", 2], sep="/"))
-
+print(colnames(mydata))
+print(numeric_vars)
+#for (i in 1:35785) {
+#   if (colnames(mydata)[i] != numeric_vars[i]) {
+#      print("WARNING NOT EQUAL")
+#      print(colnames(mydata)[i])
+#      print(numeric_vars[i])
+#   }
+#}
 mydata_num <<- mydata[, numeric_vars]
 mydata_num$classification <<- "normal"
 
